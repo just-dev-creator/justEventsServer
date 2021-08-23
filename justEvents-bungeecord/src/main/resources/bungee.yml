@@ -1,0 +1,3 @@
+name: JustEvents
+version: ${project.version}
+main: dev.just.justevents.Main

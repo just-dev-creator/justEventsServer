@@ -1,0 +1,10 @@
+name: JustEvents
+version: ${project.version}
+main: dev.just.justevents.Main
+api-version: 1.17
+depend: [ProtocolLib]
+commands:
+  allowplayer:
+    description: Allow a player to connect to a project
+  build:
+    description: Allows the player to build in the lobby
