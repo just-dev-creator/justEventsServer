@@ -1,19 +1,22 @@
 package dev.just.justevents.hotbar;
 
+import de.dytanic.cloudnet.driver.CloudNetDriver;
+import de.dytanic.cloudnet.driver.service.ServiceInfoSnapshot;
+import de.dytanic.cloudnet.ext.bridge.player.ICloudPlayer;
+import de.dytanic.cloudnet.ext.bridge.player.IPlayerManager;
+import de.dytanic.cloudnet.ext.bridge.player.executor.ServerSelectorType;
 import dev.just.justevents.Main;
 import dev.just.justevents.utils.ItemBuilder;
 import dev.just.justevents.utils.MongoDB;
-import dev.just.justevents.utils.PluginMessenger;
 import org.bson.Document;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 import java.util.Random;
 
 public class ServerItems {
@@ -62,7 +65,7 @@ public class ServerItems {
                 .toItemStack();
     }
 
-    public static void connectToServer(HumanEntity player, ServerType serverType) {
+    public static void connectToServer(HumanEntity player, String taskName) {
         if (onCooldown.contains(player)) return;
         player.closeInventory();
         HotbarGiveOnJoin.createPlayerInventory((Player) player);
@@ -73,32 +76,36 @@ public class ServerItems {
                     "bist kein Teilnehmer dieses Projektes", 10, 40, 10);
             return;
         }
-        System.out.println(serverType.toString());
         ArrayList<String> allowedProjects = (ArrayList<String>) found.get("allowedProjects");
-        System.out.println(allowedProjects);
-        System.out.println(allowedProjects.contains(serverType.toString()));
-        if (!allowedProjects.contains(serverType.toString())) {
+        if (!allowedProjects.contains(taskName)) {
             player.sendMessage(Main.getErrorPrefix() + "Du bist kein Teilnehmer dieses Projekts!");
             ((Player) player).sendTitle(ChatColor.RED + "Keine Berechtigungen!", ChatColor.GRAY + "Du " +
                     "bist kein Teilnehmer dieses Projektes", 10, 40, 10);
             return;
         }
-        List<String> args = new ArrayList<>();
-        if (serverType.equals(ServerType.ETB3)) args.add("etb3");
-        else if (serverType.equals(ServerType.ETS)) args.add("ets");
-        else if (serverType.equals(ServerType.ETB2)) args.add("etb2");
-        else if (serverType.equals(ServerType.MBE)) args.add("mbe");
-        else if (serverType.equals(ServerType.PLS)) args.add("pls");
         player.sendMessage(Main.getNetworkPrefix() + "Wir verbinden dich auf den gewünschten Server...");
-        ((Player) player).sendTitle(ChatColor.BLUE + "Du wirst verbunden...", ChatColor.GRAY + "Warte" +
+//        ((Player) player).sendTitle(ChatColor.BLUE + "Du wirst verbunden...", ChatColor.GRAY + "Warte" +
+//                " einen kurzen Moment", 1, 20,1);
+//        onCooldown.add(player);
+//        new BukkitRunnable() {
+//            @Override
+//            public void run() {
+//                onCooldown.remove(player);
+//            }
+//        }.runTaskLaterAsynchronously(Main.getPlugin(Main.class), 30);
+//        PluginMessenger.sendMessageToBungeeCord((Player) player, "Connect", args);
+        Collection<ServiceInfoSnapshot> cloudServices =
+                Main.getCloudNetDriver().getCloudServiceProvider().getCloudServices(taskName);
+        if (!cloudServices.isEmpty()) {
+            ((Player) player).sendTitle(ChatColor.BLUE + "Du wirst verbunden...", ChatColor.GRAY + "Warte" +
                 " einen kurzen Moment", 1, 20,1);
-        onCooldown.add(player);
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                onCooldown.remove(player);
-            }
-        }.runTaskLaterAsynchronously(Main.getPlugin(Main.class), 30);
-        PluginMessenger.sendMessageToBungeeCord((Player) player, "Connect", args);
+            final IPlayerManager playerManager =
+                    CloudNetDriver.getInstance().getServicesRegistry().getFirstService(IPlayerManager.class);
+            ICloudPlayer cloudPlayer = playerManager.getOnlinePlayer(player.getUniqueId());
+            cloudPlayer.getPlayerExecutor().connectToTask(taskName, ServerSelectorType.HIGHEST_PLAYERS);
+        } else {
+            ((Player) player).sendTitle(ChatColor.BLUE + "Starte Server...", ChatColor.GRAY + "Warte" +
+                    " einen kurzen Moment", 1, 100,1);
+        }
     }
 }

@@ -3,7 +3,6 @@ package dev.just.justevents.utils;
 import com.github.juliarn.npc.NPC;
 import com.github.juliarn.npc.NPCPool;
 import com.github.juliarn.npc.event.PlayerNPCInteractEvent;
-import com.github.juliarn.npc.modifier.MetadataModifier;
 import com.github.juliarn.npc.profile.Profile;
 import dev.just.justevents.Main;
 import dev.just.justevents.hotbar.ServerItems;
@@ -57,7 +56,7 @@ public class NPCHandler implements Listener {
     public void handleNPCInteract(PlayerNPCInteractEvent event) {
         if (event.getNPC().getProfile().getName().equalsIgnoreCase(ChatColor.BLUE + "EtB " +
                 "Ep. 2")) {
-            ServerItems.connectToServer(event.getPlayer(), ServerItems.ServerType.ETB2);
+            ServerItems.connectToServer(event.getPlayer(), "ETB2");
         }
     }
 }

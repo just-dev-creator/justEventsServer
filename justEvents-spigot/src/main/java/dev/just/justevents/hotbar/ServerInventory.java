@@ -24,15 +24,13 @@ public class ServerInventory implements Listener {
         if (event.getInventory() == null || event.getCurrentItem() == null ||
                 !event.getView().getTitle().equals(ChatColor.BLUE + "Server")) return;
         if (event.getCurrentItem().isSimilar(ServerItems.getItem(ServerItems.ServerType.ETB3)))
-            ServerItems.connectToServer(event.getWhoClicked(), ServerItems.ServerType.ETB3);
+            ServerItems.connectToServer(event.getWhoClicked(), "ETB3");
         else if (event.getCurrentItem().isSimilar(ServerItems.getItem(ServerItems.ServerType.ETS)))
-            ServerItems.connectToServer(event.getWhoClicked(), ServerItems.ServerType.ETS);
+            ServerItems.connectToServer(event.getWhoClicked(), "ETS");
         else if (event.getCurrentItem().isSimilar(ServerItems.getItem(ServerItems.ServerType.ETB2)))
-            ServerItems.connectToServer(event.getWhoClicked(), ServerItems.ServerType.ETB2);
-        else if (event.getCurrentItem().isSimilar(ServerItems.getItem(ServerItems.ServerType.MBE)))
-            ServerItems.connectToServer(event.getWhoClicked(), ServerItems.ServerType.MBE);
+            ServerItems.connectToServer(event.getWhoClicked(), "ETB2");
         else if (event.getCurrentItem().isSimilar(ServerItems.getItem(ServerItems.ServerType.PLS)))
-            ServerItems.connectToServer(event.getWhoClicked(), ServerItems.ServerType.PLS);
+            ServerItems.connectToServer(event.getWhoClicked(), "MBE");
     }
 
     @EventHandler
