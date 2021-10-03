@@ -13,7 +13,7 @@ public class MongoDBProvider {
     private MongoClient mongoClient;
     private MongoDatabase mongoDatabase;
     private MongoCollection<Document> users;
-//
+    private static MongoDBProvider instance;
 
     public MongoDBProvider(String connectionString, String dataBaseName, String collectionName) {
         print("Connecting to server...");
@@ -54,6 +54,7 @@ public class MongoDBProvider {
         users = mongoDatabase.getCollection(collectionName);
 
         print("Connection to database established.");
+        instance = this;
     }
 
 
@@ -61,11 +62,22 @@ public class MongoDBProvider {
         return this.users;
     }
 
+    public MongoClient getMongoClient() {
+        return mongoClient;
+    }
+
+    public MongoDatabase getMongoDatabase() {
+        return mongoDatabase;
+    }
 
     private static String getPrefix() {
         return ChatColor.GRAY + "[" + ChatColor.GREEN + "MongoDB-Connector" + ChatColor.GRAY + "] " + ChatColor.DARK_GRAY;
     }
     public static void print(String... message) {
         System.out.println(getPrefix() + Arrays.toString(message));
+    }
+
+    public static MongoDBProvider getInstance() {
+        return instance;
     }
 }
