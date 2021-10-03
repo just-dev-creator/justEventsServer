@@ -1,5 +1,6 @@
 package dev.just.justevents;
 
+import de.dytanic.cloudnet.driver.CloudNetDriver;
 import dev.just.justevents.commands.AllowPlayerToServerCommand;
 import dev.just.justevents.hotbar.*;
 import dev.just.justevents.listeners.InformationListener;
@@ -9,13 +10,12 @@ import dev.just.justevents.utils.MongoDB;
 import dev.just.justevents.utils.NPCHandler;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.UUID;
-
 public final class Main extends JavaPlugin {
+
+    private static CloudNetDriver cloudNetDriver;
 
     @Override
     public void onEnable() {
@@ -26,6 +26,7 @@ public final class Main extends JavaPlugin {
         registerListeners();
         registerCommands();
         NPCHandler.setup();
+        cloudNetDriver = CloudNetDriver.getInstance();
     }
 
     @Override
@@ -62,5 +63,9 @@ public final class Main extends JavaPlugin {
     }
     public static String getNoPermission() {
         return getErrorPrefix() + "Dir fehlen die für die Ausführung dieser Aktion benötigten Rechte.";
+    }
+
+    public static CloudNetDriver getCloudNetDriver() {
+        return cloudNetDriver;
     }
 }
