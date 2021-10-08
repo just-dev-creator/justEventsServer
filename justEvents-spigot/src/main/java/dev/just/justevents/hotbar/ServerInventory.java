@@ -16,6 +16,7 @@ public class ServerInventory implements Listener {
 //        inventory.setItem(1, ServerItems.getItem(ServerItems.ServerType.ETS));
         inventory.setItem(1, ServerItems.getItem(ServerItems.ServerType.ETB2));
         inventory.setItem(2, ServerItems.getItem(ServerItems.ServerType.PLS));
+        inventory.setItem(3, ServerItems.getItem(ServerItems.ServerType.SMASH));
         return inventory;
     }
 
@@ -31,6 +32,8 @@ public class ServerInventory implements Listener {
             ServerItems.connectToServer(event.getWhoClicked(), "ETB2");
         else if (event.getCurrentItem().isSimilar(ServerItems.getItem(ServerItems.ServerType.PLS)))
             ServerItems.connectToServer(event.getWhoClicked(), "MBE");
+        else if (event.getCurrentItem().isSimilar(ServerItems.getItem(ServerItems.ServerType.SMASH)))
+            ServerItems.connectToServer(event.getWhoClicked(), "SMASH");
     }
 
     @EventHandler
