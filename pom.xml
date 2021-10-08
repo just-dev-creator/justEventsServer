@@ -50,5 +50,7 @@
         <module>justEvents-common</module>
         <module>justEvents-spigot</module>
         <module>justEvents-bungeecord</module>
+        <module>justEvents-velocity</module>
+        <module>justEvents-cloudNet</module>
     </modules>
 </project>

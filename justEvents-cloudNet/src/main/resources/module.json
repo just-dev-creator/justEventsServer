@@ -1,0 +1,9 @@
+{
+  "group": "dev.just.justevents",
+  "name": "justEvents-CloudNet",
+  "version": "0.1-ALPHA",
+  "main": "dev.just.justevents.Main",
+  "author": "justCoding",
+  "description": "Module for CloudNet used in the justEvents ecosystem",
+  "website": "https://justcoding.tech/"
+}
