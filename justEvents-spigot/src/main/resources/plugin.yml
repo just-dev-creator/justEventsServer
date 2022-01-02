@@ -2,7 +2,8 @@ name: JustEvents
 version: ${project.version}
 main: dev.just.justevents.Main
 api-version: 1.17
-depend: [ProtocolLib]
+depend: [ProtocolLib, CloudNet-Bridge]
+author: justCoding
 commands:
   allowplayer:
     description: Allow a player to connect to a project
