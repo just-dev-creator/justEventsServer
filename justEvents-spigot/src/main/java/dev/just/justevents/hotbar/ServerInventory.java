@@ -13,10 +13,10 @@ public class ServerInventory implements Listener {
     public static Inventory inventory() {
         Inventory inventory = Bukkit.createInventory(null, 9, ChatColor.BLUE + "Server");
         inventory.setItem(0, ServerItems.getItem(ServerItems.ServerType.ETB3));
-        inventory.setItem(1, ServerItems.getItem(ServerItems.ServerType.ETB2));
-        inventory.setItem(2, ServerItems.getItem(ServerItems.ServerType.PLS));
-        inventory.setItem(3, ServerItems.getItem(ServerItems.ServerType.SMASH));
-        inventory.setItem(4, ServerItems.getItem(ServerItems.ServerType.BUILD));
+        inventory.setItem(1, ServerItems.getItem(ServerItems.ServerType.PLS));
+        inventory.setItem(2, ServerItems.getItem(ServerItems.ServerType.SMASH));
+        inventory.setItem(3, ServerItems.getItem(ServerItems.ServerType.BUILD));
+        inventory.setItem(3, ServerItems.getItem(ServerItems.ServerType.BORDER100));
         return inventory;
     }
 
@@ -36,6 +36,9 @@ public class ServerInventory implements Listener {
             ServerItems.connectToServer(event.getWhoClicked(), "SMASH");
         else if (event.getCurrentItem().isSimilar(ServerItems.getItem(ServerItems.ServerType.BUILD)))
             ServerItems.connectToServer(event.getWhoClicked(), "BUILD");
+        else if (event.getCurrentItem().isSimilar(ServerItems.getItem(ServerItems.ServerType.BORDER100))) {
+            ServerItems.connectToServer(event.getWhoClicked(), "100BORDER");
+        }
     }
 
     @EventHandler

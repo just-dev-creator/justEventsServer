@@ -32,7 +32,8 @@ public class ServerItems {
         MBE,
         PLS,
         SMASH,
-	    BUILD
+	    BUILD,
+        BORDER100
     }
 
     public static ItemStack getItem(ServerType serverType) {
@@ -72,10 +73,15 @@ public class ServerItems {
                     .setName(ChatColor.BLUE + "Build")
                     .addLoreLine(ChatColor.GRAY.toString() + ChatColor.ITALIC + "[Rechtsklick] Auf Server verbinden")
                     .toItemStack();
+        } else if (serverType.equals(ServerType.BORDER100)) {
+            return new ItemBuilder(Material.BEDROCK)
+                    .setName(ChatColor.BLUE + "100x100-Border " + ChatColor.ITALIC + "(EtB 3.5)")
+                    .addLoreLine(ChatColor.GRAY.toString() + ChatColor.ITALIC + "[Rechtsklick] Auf Server verbinden")
+                    .toItemStack();
         }
         return new ItemBuilder(Material.BARRIER)
                 .setName(ChatColor.RED + "Es ist ein Fehler aufgetreten!")
-                .addLoreLine("Trace-ID: " + new Random().nextInt(1000000) + 1)
+                .addLoreLine("Trace-ID: " + new Random().nextInt(1000000) + 1 + "_" + serverType.toString())
                 .addLoreLine("ServerType:" + serverType.toString())
                 .toItemStack();
     }
