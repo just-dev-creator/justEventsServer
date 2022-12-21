@@ -105,4 +105,10 @@ public class Configuration {
         this.writeLocalMap();
     }
 
+    public String getString(String path) {
+        Object object = get(path);
+        if (!(object instanceof String)) return null;
+        return (String) object;
+    }
+
 }

@@ -148,7 +148,7 @@ public class ServerItems {
         }
     }
 
-    private static void sendConnectInfo(HumanEntity player) {
+    public static void sendConnectInfo(HumanEntity player) {
         ((Player) player).sendTitle(ChatColor.BLUE + "Starte Server...", ChatColor.GRAY + "Warte" +
                 " einige Zeit", 1, 100,1);
         player.sendMessage(Main.getNetworkPrefix() +
@@ -156,7 +156,7 @@ public class ServerItems {
         player.sendMessage(Main.getNetworkPrefix() + "Sobald der Server bereit ist, wirst du " +
                 "automatisch verbunden!");
     }
-    private static void startAndConnect(HumanEntity player, String taskName, ServiceInfoSnapshot topServer) {
+    public static void startAndConnect(HumanEntity player, String taskName, ServiceInfoSnapshot topServer) {
         topServer.provider().startAsync().onComplete(unused -> {
             new BukkitRunnable() {
                 @Override

@@ -37,7 +37,7 @@ public class ServerInventory implements Listener {
         else if (event.getCurrentItem().isSimilar(ServerItems.getItem(ServerItems.ServerType.BUILD)))
             ServerItems.connectToServer(event.getWhoClicked(), "BUILD");
         else if (event.getCurrentItem().isSimilar(ServerItems.getItem(ServerItems.ServerType.BORDER100))) {
-            ServerItems.connectToServer(event.getWhoClicked(), "100BORDER");
+            ServerItems.connectToServer(event.getWhoClicked(), "BORDER100");
         }
     }
 

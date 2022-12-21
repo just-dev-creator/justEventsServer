@@ -49,15 +49,10 @@ public class AllowPlayerToServerCommand implements CommandExecutor {
             ArrayList<String> allowedServer = new ArrayList<>();
             if (found.containsKey("allowedProjects")) allowedServer = (ArrayList<String>) found.get("allowedProjects");
             allowedServer.add(args[1]);
-            System.out.println(allowedServer);
             MongoDB.mongoDB.getPlayerCollection().updateOne(new Document("uuid", target.getUniqueId()),
                     new Document("$set", new Document(
                     "allowedProjects", allowedServer
             )));
-            System.out.println(MongoDB.mongoDB.getPlayerCollection().find(
-                    new Document("uuid", target.getUniqueId())).first().get("allowedProjects"));
-            sender.sendMessage(Main.getPrefix() + "Der Spieler " + args[0] + " hat nun Zugriff auf das Event " +
-                    args[1]);
             return true;
         }
     }
