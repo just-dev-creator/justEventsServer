@@ -1,8 +1,7 @@
 name: JustEvents
 version: ${project.version}
 main: dev.just.justevents.Main
-api-version: 1.17
-depend: [ProtocolLib, CloudNet-Bridge]
+api-version: 1.21
 author: justCoding
 commands:
   allowplayer:

@@ -1,6 +1,5 @@
 package dev.just.justevents;
 
-import de.dytanic.cloudnet.driver.CloudNetDriver;
 import dev.just.justevents.commands.AllowPlayerToServerCommand;
 import dev.just.justevents.hotbar.*;
 import dev.just.justevents.listeners.InformationListener;
@@ -15,7 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {
 
-    private static CloudNetDriver cloudNetDriver;
+//    private static CloudNetDriver cloudNetDriver;
 
     @Override
     public void onEnable() {
@@ -25,8 +24,8 @@ public final class Main extends JavaPlugin {
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         registerListeners();
         registerCommands();
-        NPCHandler.setup();
-        cloudNetDriver = CloudNetDriver.getInstance();
+//        NPCHandler.setup();
+//        cloudNetDriver = CloudNetDriver.getInstance();
     }
 
     @Override
@@ -65,7 +64,7 @@ public final class Main extends JavaPlugin {
         return getErrorPrefix() + "Dir fehlen die für die Ausführung dieser Aktion benötigten Rechte.";
     }
 
-    public static CloudNetDriver getCloudNetDriver() {
-        return cloudNetDriver;
-    }
+//    public static CloudNetDriver getCloudNetDriver() {
+//        return cloudNetDriver;
+//    }
 }
