@@ -1,5 +1,7 @@
 package dev.just.justevents.hotbar;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,6 +14,9 @@ public class DamageProtector implements Listener {
     public void onDamage(EntityDamageEvent event) {
         if (event.getEntityType().equals(EntityType.PLAYER)) event.setCancelled(true);
         else return;
+        if (event.getCause().equals(EntityDamageEvent.DamageCause.VOID)) {
+            event.getEntity().teleport(new Location(Bukkit.getWorld("world"), -3, 0, 0));
+        }
         ((Player) event.getEntity()).setHealth(20.0);
     }
 
