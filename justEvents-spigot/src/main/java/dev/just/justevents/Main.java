@@ -1,6 +1,7 @@
 package dev.just.justevents;
 
 import dev.just.justevents.commands.AllowPlayerToServerCommand;
+import dev.just.justevents.commands.BanCommand;
 import dev.just.justevents.hotbar.*;
 import dev.just.justevents.listeners.InformationListener;
 import dev.just.justevents.listeners.JoinLeaveMessages;
@@ -46,6 +47,7 @@ public final class Main extends JavaPlugin {
     private void registerCommands() {
         getCommand("allowplayer").setExecutor(new AllowPlayerToServerCommand());
         getCommand("build").setExecutor(new BuildCommand());
+        getCommand("ban").setExecutor(new BanCommand());
     }
 
     public static String getPrefix() {

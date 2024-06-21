@@ -1,10 +1,13 @@
 package dev.just.justevents.utils;
 
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Config {
     private static YamlConfiguration configuration;
@@ -118,5 +121,22 @@ public class Config {
 
     public static boolean isInteger(String path) {
         return configuration.isInt(path);
+    }
+
+    public static ConfigurationSection getSection(String path) {
+        return configuration.getConfigurationSection(path);
+    }
+
+    public static List<ConfigurationSection> getSections(String rootSection) {
+        Set<String> sections = configuration.getConfigurationSection(rootSection).getKeys(false);
+        List<ConfigurationSection> configurationSections = new ArrayList<>();
+        for (String key : sections) {
+            configurationSections.add(configuration.getConfigurationSection(rootSection + "." + key));
+        }
+        return configurationSections;
+    }
+
+    public static Set<String> getKeysSection(String rootSection) {
+        return configuration.getConfigurationSection(rootSection).getKeys(false);
     }
 }

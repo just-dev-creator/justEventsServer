@@ -8,3 +8,5 @@ commands:
     description: Allow a player to connect to a project
   build:
     description: Allows the player to build in the lobby
+  ban:
+    description: Ban a player from the server
